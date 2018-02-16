@@ -1,0 +1,21 @@
+{% extends "@BoaAdmin/layout.html.twig" %}
+
+{% block body %}
+    <h1>Producten</h1>
+
+    <div class="mb-3">
+        <a href="{{ path('admin_productcreate') }}" class="btn btn-primary"><span class="icon-plus mr-3"></span> Product toevoegen</a>
+    </div>
+
+    <table class="table" id="productsTable">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Naam</th>
+                <th scope="col">Prijs</th>
+                <th scope="col">Korting</th>
+                <th scope="col">Acties</th>
+            </tr>
+        </thead>
+    </table>
+{% endblock %}

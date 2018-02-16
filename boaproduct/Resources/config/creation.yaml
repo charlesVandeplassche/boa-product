@@ -1,0 +1,39 @@
+services:
+
+    boa_product.create.form.factory:
+        class: App\Boa\ProductBundle\Form\Factory\FormFactory
+        public: true
+        autowire: true
+        arguments:
+            - '@form.factory'
+            - '%boa_product.create.form.name%'
+            - '%boa_product.create.form.type%'
+            - '%boa_product.create.form.validation_groups%'
+
+    App\Boa\ProductBundle\Form\Factory\FormFactory: '@boa_product.create.form.factory'
+
+    boa_product.create.form.type:
+        class: App\Boa\ProductBundle\Form\Type\CreateFormType
+        public: true
+        autowire: false
+        tags:
+            - { name: form.type, alias: boa_product_create }
+        arguments:
+            - '%boa_product.model.product.class%'
+
+    App\Boa\ProductBundle\Form\Type\CreateFormType: '@boa_product.create.form.type'
+
+    boa_product.create.controller:
+        class: App\Boa\ProductBundle\Controller\CreateController
+        public: true
+        autowire: false
+        arguments:
+            - '@boa_product.create.form.factory'
+            - '@boa_product.product_manager'
+
+    App\Boa\ProductBundle\Controller\:
+        resource: '../../Controller'
+        tags: ['controller.service_arguments']
+        public: true
+        calls:
+            - [setContainer, ["@service_container"]]

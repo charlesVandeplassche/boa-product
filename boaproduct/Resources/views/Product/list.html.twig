@@ -1,0 +1,7 @@
+<div class="product-card-container d-flex flex-wrap">
+    {% for product in products %}
+        <div class="product-card-wrapper">
+            {% include '@BoaProduct/Product/card.html.twig' with {'product': product} %}
+        </div>
+    {% endfor %}
+</div>

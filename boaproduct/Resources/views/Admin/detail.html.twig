@@ -1,0 +1,19 @@
+{% extends "@BoaAdmin/layout.html.twig" %}
+
+{% block body %}
+    <div class="mb-3">
+        <a href="{{ path('admin_productlist') }}" class="btn btn-light"><span class="icon-angle-left mr-3"></span> Terug naar overzicht</a>
+    </div>
+
+    <h1>Product: {{ product.name }}</h1>
+
+    {% for field, type in fieldTranslations %}
+        <div class="mb-3">
+            <h3>{{ field }}</h3>
+
+            {% for lang, language in type %}
+                <p>{{ lang }}: {{ language.content }}</p>
+            {% endfor %}
+        </div>
+    {% endfor %}
+{% endblock %}

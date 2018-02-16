@@ -1,0 +1,24 @@
+services:
+    boa_product.product_manager.default:
+        class: App\Boa\ProductBundle\Doctrine\ProductManager
+        autowire: false
+        arguments:
+            - '@boa_product.object_manager'
+            - '%boa_product.model.product.class%'
+
+    App\Boa\ProductBundle\Doctrine\ProductManager: '@boa_product.product_manager.default'
+
+    boa_product.object_manager:
+        class: Doctrine\Common\Persistence\ObjectManager
+        autowire: false
+        arguments:
+            - '%boa_product.model_manager_name%'
+
+    Doctrine\Common\Persistence\ObjectManager: '@boa_product.object_manager'
+
+    App\Boa\ProductBundle\Controller\:
+        resource: '../../Controller'
+        tags: ['controller.service_arguments']
+        public: true
+        calls:
+            - [setContainer, ["@service_container"]]
